@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CAT_PATH="../artifacts/s21_cat"
+CAT_PATH="../artifacts/cat"
 
 COUNTER_SUCCESS=0
 COUNTER_FAIL=0
