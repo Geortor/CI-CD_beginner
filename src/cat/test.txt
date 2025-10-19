@@ -1,0 +1,32 @@
+﻿﻿Some text here
+New line text
+Long text with special symbols:
+~!@#$%^&*()-=_+
+QWERTYUIOP{}|ASDFGHJKL:
+"ZXCVBNM<>?qwertyuiop[]
+\asdfghjkl;
+'zxcvbnm,.
+/ЙЦУКЕНГШЩЗХЪ/
+ФЫВА
+ПРОЛ
+ДЖЭЯ
+ЧСМИ
+ТЬБЮ
+,
+йцукенгшщзхъ\
+фывапролджэячсмитьбю.
+1234567890ёЁ
+@▒¼º√╙♥♥♥☻☺☺☺
+
+
+
+
+
+
+
+
+777
+-b -s -t -e -E lalk
+        TAB        
+
+

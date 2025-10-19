@@ -1,0 +1,62 @@
+#!/bin/bash
+
+S21_CAT_PATH="../artifacts/s21_cat"
+
+COUNTER_SUCCESS=0
+COUNTER_FAIL=0
+DIFF_RES=""
+TEST_FILE="test.txt"
+
+rm -f log.txt
+touch log.txt
+
+for flag in -b -e -n -s -t -v -E -T --number-nonblank --number --squeeze-blank
+do
+    TEST1="$flag $TEST_FILE"
+    $S21_CAT_PATH $TEST1 > s21_cat.txt  # Используем полный путь
+    cat $TEST1 > cat.txt
+    DIFF_RES="$(diff -s s21_cat.txt cat.txt)"
+    if [ "$DIFF_RES" = "Files s21_cat.txt and cat.txt are identical" ]
+    then
+        echo "$flag SUCCESS" >> log.txt
+        COUNTER_SUCCESS=$((COUNTER_SUCCESS+1))
+    else
+        echo "$flag FAIL" >> log.txt
+        COUNTER_FAIL=$((COUNTER_FAIL+1))
+    fi
+    rm -f s21_cat.txt cat.txt
+done
+
+for flag1 in -b -e -n -s -t -v -E -T --number-nonblank --number --squeeze-blank
+do
+  for flag2 in -b -e -n -s -t -v -E -T --number-nonblank --number --squeeze-blank
+  do
+    if [ "$flag1" != "$flag2" ]
+    then
+      TEST1="$flag1 $flag2 $TEST_FILE"
+      $S21_CAT_PATH $TEST1 > s21_cat.txt  # Используем полный путь
+      cat $TEST1 > cat.txt
+      DIFF_RES="$(diff -s s21_cat.txt cat.txt)"
+      if [ "$DIFF_RES" = "Files s21_cat.txt and cat.txt are identical" ]
+      then
+        echo "$flag1 $flag2 SUCCESS" >> log.txt
+        COUNTER_SUCCESS=$((COUNTER_SUCCESS+1))
+      else
+        echo "$flag1 $flag2 FAIL" >> log.txt
+        COUNTER_FAIL=$((COUNTER_FAIL+1))
+      fi
+      rm -f s21_cat.txt cat.txt
+    fi
+  done
+done
+
+echo -e "------------------------------"
+echo -e "SUCCESS: $COUNTER_SUCCESS"
+echo -e "FAIL: $COUNTER_FAIL"
+echo -e "------------------------------"
+
+if [ "$COUNTER_FAIL" -gt 0 ]; then
+    exit 1
+else
+    exit 0
+fi

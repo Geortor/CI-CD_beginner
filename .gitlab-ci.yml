@@ -1,0 +1,54 @@
+stages:
+  - build
+  - style_test
+  - unit_test
+  - deploy
+  - telega
+build Cat/Grep:
+  script:
+    - echo "building..."
+    - ls src
+    - cd src/cat
+    - pwd
+    - make
+    - cd ../grep
+    - make
+    - ls ../artifacts
+  artifacts:
+    paths:
+      - pwd
+      - src/artifacts   
+    expire_in: 30 days
+  stage: build
+
+code-style:
+  stage: style_test
+  allow_failure: false
+  script:
+    - clang-format -Werror -n src/cat/cat.c
+    - clang-format -Werror -n src/grep/grep.c
+
+tests:
+  stage: unit_test
+  script:
+  - cd src/cat
+  - bash test
+  - cd ../grep
+  - make tests
+
+pack and deploy job:
+  when: manual
+  script:
+    - ls src/artifacts
+    - pwd
+    - echo "запуск на другом серваке"
+    - bash CD
+  stage: deploy
+
+telega_bot:
+  needs:
+  - pack and deploy job
+  when: on_success
+  script:
+  - bash Bot_Telegram
+  stage: telega 
