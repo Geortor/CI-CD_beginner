@@ -1,7 +1,7 @@
 #!/bin/bash
 SUDO_PASSWORD=00000
-S21_CAT=/home/gitlab-runner/builds/mpJmftMe/0/students/DO6_CICD.ID_356283/theiajar_student.21_school.ru/DO6_CICD-1/src/artifacts/s21_cat
-S21_GREP=/home/gitlab-runner/builds/mpJmftMe/0/students/DO6_CICD.ID_356283/theiajar_student.21_school.ru/DO6_CICD-1/src/artifacts/s21_grep
+CAT=/home/gitlab-runner/builds/mpJmftMe/0/students/DO6_CICD.ID_356283/theiajar_student.school.ru/DO6_CICD-1/src/artifacts/cat
+GREP=/home/gitlab-runner/builds/mpJmftMe/0/students/DO6_CICD.ID_356283/theiajar_student.school.ru/DO6_CICD-1/src/artifacts/rep
 #USER= geortor
 #IP_VM= 192.168.0.30
 
@@ -10,7 +10,7 @@ chmod 777 $S21_CAT $S21_GREP
 #echo "HOST *" > ~/.ssh/config№
 #echo "StrictHostKeyChecking no" >> ~/.ssh/config
 
-scp -B $S21_CAT $S21_GREP geortor@192.168.0.27:/tmp
-ssh "geortor@192.168.0.27" "echo $SUDO_PASSWORD | sudo su -S cp /tmp/s21_cat /tmp/s21_grep /usr/local/bin && chmod -R +x /usr/local/bin"
+scp -B $CAT $GREP geortor@192.168.0.27:/tmp
+ssh "geortor@192.168.0.27" "echo $SUDO_PASSWORD | sudo su -S cp /tmp/cat /tmp/grep /usr/local/bin && chmod -R +x /usr/local/bin"
 
 exit 0
